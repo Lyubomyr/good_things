@@ -32,6 +32,9 @@
       </header>
 
       <div class="row">
+        <% flash.each do |name, msg|%>
+          <%=msg%>
+        <%end%>
         <div class="tbody col-xs-10 col-xs-offset-1" style = "margin-top:50px; min-height: 680px;">
           <%= yield %>
         </div>
