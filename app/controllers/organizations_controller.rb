@@ -16,7 +16,7 @@ class OrganizationsController < ApplicationController
 
   def show
   end
-  
+
   # # POST /organizations
   # def create
   #   @organization = Organization.new(organization_params)
@@ -65,12 +65,12 @@ class OrganizationsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_organization
-    if (Organization.find(params[:id]).users.ids.include? current_user.id)
-      @organization = Organization.find(params[:id])
+    @org_to_check = Organization.find(params[:id])
+    if (@org_to_check.users.ids.include? current_user.id)
+      @organization = @org_to_check
     else
       redirect_to(organizations_url, alert: 'You have no rights to check or change the organization.')
     end
-
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

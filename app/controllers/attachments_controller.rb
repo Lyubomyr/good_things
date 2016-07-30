@@ -1,0 +1,3 @@
+class Attachment < ApplicationController
+
+end
