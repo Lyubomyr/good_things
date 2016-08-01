@@ -42,6 +42,9 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        # @new_attach = @user.attachments.new params[:attachment]
+        # @new_attach.owner = current_user
+        # @new_attach.save
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -69,6 +72,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :about_myself, :country, :city, :address)
+      params.require(:user).permit(:name, :about_myself, :country, :city, :address, :avatar)
     end
 end

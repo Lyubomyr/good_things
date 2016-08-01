@@ -44,6 +44,9 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
+         # @new_attachment = @organization.attachments.new params[:attachment]
+         # @new_attachment.owner = current_user
+         # @new_attachment.save!
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
       else
@@ -75,7 +78,7 @@ class OrganizationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def organization_params
-    params.require(:organization).permit(:name, :description, :address, :contacts)
+    params.require(:organization).permit(:name, :description, :address, :contacts, :attachment)
   end
 
 end

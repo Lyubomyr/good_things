@@ -23,6 +23,7 @@
         </div>
         <div class="col-xs-2">
           <%if user_signed_in? %>
+              <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></div>
               <%= link_to(t('.edit_user'), edit_user_registration_path) %>
               <%= link_to(t('.sign_out'), destroy_user_session_path, method: :delete) %>
           <%else%>
