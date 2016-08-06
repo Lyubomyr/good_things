@@ -17,7 +17,7 @@ class OrganizationsController < ApplicationController
   def show
   end
 
-  # # POST /organizations
+  # POST /organizations
   # def create
   #   @organization = Organization.new(organization_params)
   #   @organization.users << current_user
@@ -31,6 +31,9 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
+        if params[:organization][:attachment]
+          add_attachment
+        end
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else
@@ -44,9 +47,9 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-         # @new_attachment = @organization.attachments.new params[:attachment]
-         # @new_attachment.owner = current_user
-         # @new_attachment.save!
+        if params[:organization][:attachment]
+          add_attachment
+        end
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
       else
@@ -79,6 +82,12 @@ class OrganizationsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def organization_params
     params.require(:organization).permit(:name, :description, :address, :contacts, :attachment)
+  end
+
+  def add_attachment
+    @new_attachment = @organization.attachments.new attachment: params[:organization][:attachment]
+    @new_attachment.owner = current_user
+    @new_attachment.save!
   end
 
 end

@@ -35,7 +35,20 @@
     <%= f.label :attachment %>
     <%= f.file_field :attachment %>
   </div>
+
+  <table>
+    <tbody>
+      <% @organization.attachments.each do |att| %>
+        <tr>
+          <td> <%= att.attachment_file_name %> </td>
+          <td> <%= link_to 'Destroy', att, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
