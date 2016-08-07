@@ -20,8 +20,8 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     @organization.users << current_user
-    if organization_params[:attachment]
-      @organization.attachments.build attachment: params[:organization][:attachment], owner: current_user
+    if (organization_params[:attachment])
+      add_attachment
     end
     respond_to do |format|
       if @organization.save!
@@ -37,8 +37,8 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1
   def update
     respond_to do |format|
-      if organization_params[:attachment]
-        @organization.attachments.build attachment: params[:organization][:attachment], owner: current_user
+      if (organization_params[:attachment])
+        add_attachment
       end
       if @organization.update(organization_params)
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.'}
@@ -76,9 +76,7 @@ class OrganizationsController < ApplicationController
   end
 
   def add_attachment
-    @new_attachment = @organization.attachments.new attachment: params[:organization][:attachment], owner: current_user
-    @new_attachment.owner = current_user
-    @new_attachment.save!
+      @organization.attachments.build attachment: params[:organization][:attachment], owner: current_user
   end
 
 end
