@@ -17,23 +17,14 @@ class OrganizationsController < ApplicationController
   def show
   end
 
-  # POST /organizations
-  # def create
-  #   @organization = Organization.new(organization_params)
-  #   @organization.users << current_user
-  #   flash[:notice] = 'Organization was successfully created.' if @organization.save
-  #   respond_with(@organization) # In order to use respond_with, first you need to declare the formats your controller responds to in the class level.
-  # end
-
   def create
     @organization = Organization.new(organization_params)
     @organization.users << current_user
-
+    if organization_params[:attachment]
+      @organization.attachments.build attachment: params[:organization][:attachment], owner: current_user
+    end
     respond_to do |format|
-      if @organization.save
-        if params[:organization][:attachment]
-          add_attachment
-        end
+      if @organization.save!
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else
@@ -46,11 +37,11 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1
   def update
     respond_to do |format|
+      if organization_params[:attachment]
+        @organization.attachments.build attachment: params[:organization][:attachment], owner: current_user
+      end
       if @organization.update(organization_params)
-        if params[:organization][:attachment]
-          add_attachment
-        end
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to @organization, notice: 'Organization was successfully updated.'}
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit }
@@ -85,7 +76,7 @@ class OrganizationsController < ApplicationController
   end
 
   def add_attachment
-    @new_attachment = @organization.attachments.new attachment: params[:organization][:attachment]
+    @new_attachment = @organization.attachments.new attachment: params[:organization][:attachment], owner: current_user
     @new_attachment.owner = current_user
     @new_attachment.save!
   end

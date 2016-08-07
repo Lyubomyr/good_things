@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   root "home#index"
   resources :organizations
+  resources :attachments, only: [:show, :destroy]
 
-  get '/attachments/:id', to: 'attachments#show', as: 'attachment'
-  delete '/attachments/:id', to: 'attachments#destroy'
 end

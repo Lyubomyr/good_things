@@ -13,5 +13,4 @@ class User < ApplicationRecord
 
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :owned_attachments, class_name: 'Attachment', foreign_key: :user_id
-
 end
