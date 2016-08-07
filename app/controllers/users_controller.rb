@@ -42,9 +42,6 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        # @new_attach = @user.attachments.new params[:attachment]
-        # @new_attach.owner = current_user
-        # @new_attach.save
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

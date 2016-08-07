@@ -24,7 +24,7 @@ class OrganizationsController < ApplicationController
       add_attachment
     end
     respond_to do |format|
-      if @organization.save!
+      if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
       else
