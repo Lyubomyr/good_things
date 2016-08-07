@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   root "home#index"
   resources :organizations
+  resources :attachments, only: [:show, :destroy]
+
 end

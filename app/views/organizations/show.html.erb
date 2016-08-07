@@ -20,5 +20,12 @@
   <%= @organization.contacts %>
 </p>
 
+<p>
+  <strong>Attachments:</strong>
+  <% @organization.attachments.each do |att| %>
+        <li> <%= att.attachment_file_name %> </li>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_organization_path(@organization) %> |
 <%= link_to 'Back', organizations_path %>

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727091620) do
+ActiveRecord::Schema.define(version: 20160730121252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer  "user_id"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["attachable_type"], name: "index_attachments_on_attachable_type", using: :btree
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +61,10 @@ ActiveRecord::Schema.define(version: 20160727091620) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.boolean  "admin"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

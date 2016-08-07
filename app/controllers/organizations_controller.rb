@@ -16,19 +16,11 @@ class OrganizationsController < ApplicationController
 
   def show
   end
-  
-  # # POST /organizations
-  # def create
-  #   @organization = Organization.new(organization_params)
-  #   @organization.users << current_user
-  #   flash[:notice] = 'Organization was successfully created.' if @organization.save
-  #   respond_with(@organization) # In order to use respond_with, first you need to declare the formats your controller responds to in the class level.
-  # end
 
   def create
     @organization = Organization.new(organization_params)
     @organization.users << current_user
-
+    add_attachment_if_exists
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
@@ -43,8 +35,9 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1
   def update
     respond_to do |format|
+      add_attachment_if_exists
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to @organization, notice: 'Organization was successfully updated.'}
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit }
@@ -65,17 +58,23 @@ class OrganizationsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_organization
-    if (Organization.find(params[:id]).users.ids.include? current_user.id)
-      @organization = Organization.find(params[:id])
+    org_to_check = Organization.find(params[:id])
+    if (org_to_check.users.ids.include? current_user.id)
+      @organization = org_to_check
     else
       redirect_to(organizations_url, alert: 'You have no rights to check or change the organization.')
     end
-
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def organization_params
-    params.require(:organization).permit(:name, :description, :address, :contacts)
+    params.require(:organization).permit(:name, :description, :address, :contacts, :attachment)
+  end
+
+  def add_attachment_if_exists
+    if (organization_params[:attachment])
+      @organization.attachments.build attachment: organization_params[:attachment], owner: current_user
+    end
   end
 
 end
