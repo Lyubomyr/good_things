@@ -1,0 +1,54 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_area :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type %>
+    <%= f.collection_select(:request_type, Request.request_types.keys, :to_s, :to_s)  %>
+  </div>
+
+    <div class="field">
+      <%= f.label :status %>
+      <%= f.collection_select(:status, Request.statuses.keys, :to_s, :to_s)  %>
+    </div>
+
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_field :text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %>
+  </div>
+
+  <table>
+    <tbody>
+      <% @request.attachments.each do |att| %>
+        <tr>
+          <td> <%= att.attachment_file_name %> </td>
+          <td> <%= link_to 'Destroy', att, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
