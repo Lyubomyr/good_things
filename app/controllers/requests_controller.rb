@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/new
   def new
-    @request = Request.new
+    @request = current_user.requests.build(request_params)
   end
 
   # GET /requests/1/edit
@@ -18,8 +18,7 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @request = Request.new(request_params)
-    @request.requestor = current_user
+    @request = current_user.requests.build(request_params)
     add_attachment_if_exists
     respond_to do |format|
       if @request.save
@@ -58,8 +57,8 @@ class RequestsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_request
-    request_to_check = Request.find(params[:id])
-    if (request_to_check.requestor.id == current_user.id)
+    request_to_check = current_user.requests.find(params[:id])
+    if (request_to_check)
       @request = request_to_check
     else
       redirect_to(requests_url, alert: 'You have no rights to check or change the request.')
