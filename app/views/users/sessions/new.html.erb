@@ -1,26 +1,27 @@
-<h2>Log in</h2>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label "Эл почта" %>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label "Пароль" %>
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
+
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <%= link_to "Напомнить пароль", new_password_path(resource_name) %><br />
+  <% end -%>
 
   <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label "Запомнить меня" %>
     </div>
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Войти" %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>

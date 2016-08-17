@@ -18,17 +18,42 @@
             <li class="active"><a href="/">Главная</a></li>
             <li><a href="#">Профиль</a></li>
             <li><a href="#">Сообщение</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><a href="/organizations">Организации</a></li>
           </ul>
         </div>
         <div class="col-xs-2">
           <%if user_signed_in? %>
-              <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></div>
-              <%= link_to(t('.edit_user'), edit_user_registration_path) %>
-              <%= link_to(t('.sign_out'), destroy_user_session_path, method: :delete) %>
+              <div class="dropdown">
+                <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
+                  <div class="dropdown-content">
+                    <%= link_to "Редактировать", edit_user_registration_path %>
+                    <%= link_to "Выход", destroy_user_session_path, method: :delete %>
+                  </div>
+                </div>
+              </div>
           <%else%>
-              <%= link_to(t('.sign_in'), new_user_session_path) %>
+              <div class="link-form" data-toggle="modal" data-target="#myModal">Войти в кабинет</div>
+              <!-- Modal -->
+              <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Войти в систему</h4>
+                    </div>
+                    <div class="modal-body">
+                      <%= link_to "Войти", new_user_session_path %>
+                      <%= link_to "Зарегистрироваться", new_user_registration_path %>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
           <%end%>
         </div>
       </header>
