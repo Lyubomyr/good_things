@@ -24,3 +24,11 @@ config/database.yml
 
 .rvmrc
 .ruby-gemset
+
+.env
+.env.production
+.env.development
+.env.staging
+.env.local
+
+public/system
