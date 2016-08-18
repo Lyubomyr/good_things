@@ -32,7 +32,7 @@
             <%= link_to "Зарегистрироваться", new_user_registration_path %>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default"><%= f.submit "Войти" %></button>
+          <%= f.submit "Войти", class:"btn btn-default"%>
           <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
         </div>
         <% end %>
