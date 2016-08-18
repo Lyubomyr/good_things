@@ -23,7 +23,10 @@ class RequestsController < ApplicationController
     add_attachment_if_exists
     respond_to do |format|
       if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
+        format.html do
+          UserMailer.request_created(current_user, @request).deliver_later
+          redirect_to @request, notice: 'Request was successfully created.'
+        end
         format.json { render :show, status: :created, location: @request }
       else
         format.html { render :new }
