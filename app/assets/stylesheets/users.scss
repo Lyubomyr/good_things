@@ -16,12 +16,27 @@
 }
 
 .link-form{
+
   cursor: pointer;
   color: #337ab7;
 }
 
 .link-form:hover{
   color: red;
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+
+  &:visited {
+    color: #337ab7;
+  }
+
+  &:hover {
+    color: red;
+    text-decoration: none;
+  }
 }
 
 /* Dropdown Content (Hidden by Default) */
