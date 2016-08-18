@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @request.title %>
+</p>name
+
+<p>
+  <strong>Description:</strong>
+  <%= @request.text %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @request.request_type %>
+</p>
+
+<p>
+  <strong>Contacts:</strong>
+  <%= @request.status %>
+</p>
+
+<p>
+  <strong>Attachments:</strong>
+  <% @request.attachments.each do |att| %>
+        <li> <%= att.attachment_file_name %> </li>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "home", to: "home#index"
 
   root "home#index"
-  resources :organizations
+  resources :organizations, :requests
   resources :attachments, only: [:show, :destroy]
 
 end
