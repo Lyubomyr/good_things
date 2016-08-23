@@ -1,26 +1,47 @@
-<h2>Log in</h2>
+<div class="link-form" data-toggle="modal" data-target="#myModal">Войти в кабинет</div>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Войти в систему</h4>
+        </div>
+        <div class="modal-body">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.label "Эл почта" %>
+            <div class="field">
+              <%= f.email_field :email, autofocus: true %>
+            </div>
+            <%= f.label "Пароль" %>  
+            <div class="field">
+              <%= f.password_field :password, autocomplete: "off" %>
+            </div>
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                <%= link_to "Напомнить пароль", new_password_path(resource_name) %><br />
+            <% end -%>
+            <% if devise_mapping.rememberable? -%>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label "Запомнить меня" %>
+              </div>
+            <% end -%>
+          <div class="link">
+            <%= link_to "Зарегистрироваться", new_user_registration_path %>
+          </div>
+        <div class="modal-footer">
+          <%= f.submit "Войти", class:"btn btn-default"%>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+        <% end %>
+      </div>
     </div>
-  <% end -%>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
 
-<%= render "users/shared/links" %>
+
+
+
+
