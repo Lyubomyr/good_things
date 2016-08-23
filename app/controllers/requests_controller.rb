@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/new
   def new
-    @request = current_user.requests.build(request_params)
+    @request = current_user.requests.new
   end
 
   # GET /requests/1/edit
