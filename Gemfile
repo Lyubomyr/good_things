@@ -25,6 +25,9 @@ gem 'dotenv-rails'
 gem 'sidekiq'
 gem 'foreman'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem "letter_opener"
