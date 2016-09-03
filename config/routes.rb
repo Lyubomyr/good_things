@@ -1,6 +1,12 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  mount Sidekiq::Web => '/sidekiq'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  # devise_scope :user do
+  #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  # end
 
   namespace :admin do
     resources :pages
@@ -9,5 +15,7 @@ Rails.application.routes.draw do
   get "home", to: "home#index"
 
   root "home#index"
-  resources :organizations
+  resources :organizations, :requests
+  resources :attachments, only: [:show, :destroy]
+
 end

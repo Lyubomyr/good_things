@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails', '~> 5.0.0'
+gem 'sinatra', github: 'sinatra'
 gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
@@ -12,15 +13,24 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
+gem "paperclip", "~> 5.0.0"
 
 gem 'haml'
 gem 'slim'
 gem 'bootstrap-sass'
 # gem 'bootstrap_form'
 # gem 'simple_form'
+#
+gem 'dotenv-rails'
+gem 'sidekiq'
+gem 'foreman'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem "letter_opener"
 end
 
 group :development do

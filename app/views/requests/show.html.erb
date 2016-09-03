@@ -2,30 +2,30 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @organization.name %>
+  <%= @request.title %>
 </p>name
 
 <p>
   <strong>Description:</strong>
-  <%= @organization.description %>
+  <%= @request.text %>
 </p>
 
 <p>
   <strong>Address:</strong>
-  <%= @organization.address %>
+  <%= @request.request_type %>
 </p>
 
 <p>
   <strong>Contacts:</strong>
-  <%= @organization.contacts %>
+  <%= @request.status %>
 </p>
 
 <p>
   <strong>Attachments:</strong>
-  <% @organization.attachments.each do |att| %>
+  <% @request.attachments.each do |att| %>
         <li> <%= att.attachment_file_name %> </li>
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>
