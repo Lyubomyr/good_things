@@ -21,6 +21,11 @@
 </p>
 
 <p>
+  <strong>Comments:</strong>
+  <%= @request.comments %>
+</p>
+
+<p>
   <strong>Attachments:</strong>
   <% @request.attachments.each do |att| %>
         <li> <%= att.attachment_file_name %> </li>

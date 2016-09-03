@@ -23,7 +23,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       if @request.save
         format.html do
-          UserMailer.request_created(current_user, @request).deliver_later
+          #UserMailer.request_created(current_user, @request).deliver_later
           redirect_to @request, notice: 'Request was successfully created.'
         end
         format.json { render :show, status: :created, location: @request }
@@ -70,7 +70,7 @@ class RequestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def request_params
-    params.require(:request).permit(:request_type, :title, :text, :status, :attachment)
+    params.require(:request).permit(:request_type, :title, :text, :status, :attachment, :comments)
   end
 
   def add_attachment_if_exists
