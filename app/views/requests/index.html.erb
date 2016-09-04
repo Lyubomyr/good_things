@@ -2,7 +2,7 @@
 
 <h1>My Requests</h1>
 
-<table>
+<table class="table">
   <thead>
   <tr>
     <th>Name</th>
@@ -24,9 +24,10 @@
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
+  </table>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New request', new_request_path %>
+<a href="/requests/new?" class="btn btn-default" role="button">New Request</a>
