@@ -17,15 +17,11 @@
         <div class = "col-xs-offset-1 col-xs-8">
           <ul class="nav nav-pills">
             <li><%= link_to t(".home"), root_path %></li>
-            <li><a href="#">Профиль</a></li>
-            <li><a href="#">Сообщение</a></li>
-            <li><%= link_to "Organizations", organizations_path %></li>
             <li><%= link_to "Requests", requests_path %></li>
+            <li><%= link_to "Organizations", organizations_path %></li>
             <li><%= link_to "Sign up", new_user_registration_path %></li>
-            <li><a id="test_link" href="#">TEST</a></li>
           </ul>
         </div>
-          <%if user_signed_in? %>
             <div class="col-xs-2">
               <div class="dropdown">
                 <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
