@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoodThings</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+
+<body>
+    <div class="container">
+
+      <header class="row" style="margin-top: 20px;">
+        <div class = "col-xs-offset-1 col-xs-9">
+          <ul class="nav nav-pills">
+          <li><a href="/" >User</a></li>
+            <li><a href="#" >Request</a></li>
+            <li><a href="#" >Static Page</a></li>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+          </ul>
+        </div>
+        <div class="col-xs-2">
+          <%if user_signed_in? %>
+              <div class="dropdown">
+                <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
+                  <div class="dropdown-content">
+                    <%= link_to "Редактировать", edit_user_registration_path %>
+                    <%= link_to "Выход", destroy_user_session_path, method: :delete %>
+                  </div>
+                </div>
+              </div>
+          <%else%>
+
+          <%end%>
+        </div>
+      </header>
+
+      <div class="row">
+        <% flash.each do |name, msg|%>
+          <%=msg%>
+        <%end%>
+        <div class="tbody col-xs-10 col-xs-offset-1" style = "margin-top:50px; min-height: 680px;">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  <h1>This only for admin</h1>
+    <%= yield %>
+</body>
+
+
+</html>

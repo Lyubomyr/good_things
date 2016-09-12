@@ -10,7 +10,8 @@
   </head>
 
   <body>
-    <div class="container-fluid">
+  <%if user_signed_in? %>
+    <div class="container">
 
       <header class="row" style="margin-top: 20px;">
         <div class = "col-xs-offset-1 col-xs-8">
@@ -24,8 +25,8 @@
             <li><a id="test_link" href="#">TEST</a></li>
           </ul>
         </div>
-        <div class="col-xs-1">
           <%if user_signed_in? %>
+            <div class="col-xs-2">
               <div class="dropdown">
                 <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
                   <div class="dropdown-content">
@@ -35,7 +36,6 @@
                 </div>
               </div>
           <%else%>
-
           <%end%>
         </div>
       </header>

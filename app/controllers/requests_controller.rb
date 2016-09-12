@@ -70,7 +70,7 @@ class RequestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def request_params
-    params.require(:request).permit(:request_type, :title, :text, :status, :attachment)
+    params.require(:request).permit(:request_type, :title, :text, :status, :attachment, :comments)
   end
 
   def add_attachment_if_exists
