@@ -16,7 +16,7 @@
       <header class="row" style="margin-top: 20px;">
         <div class = "col-xs-offset-1 col-xs-9">
           <ul class="nav nav-pills">
-          <li><a href="/" class="home">Home</a></li>
+          <li><a href="/" class = "active" >Home</a></li>
             <li><a href="#" class="profile">Profile</a></li>
             <li><a href="#" class="messages" >Messages</a></li>
             <li><a href="/organizations" class="organizations">Organizations</a></li>
@@ -28,12 +28,14 @@
               <div class="dropdown">
                 <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
                   <div class="dropdown-content">
+                  <%if  current_user.try(:admin_permissions?) %>
+                    <%= link_to "Админка", admin_pages_path %>
+                    <%end%>
                     <%= link_to "Редактировать", edit_user_registration_path %>
                     <%= link_to "Выход", destroy_user_session_path, method: :delete %>
                   </div>
                 </div>
               </div>
-          <%else%>
           <%end%>
         </div>
       </header>
