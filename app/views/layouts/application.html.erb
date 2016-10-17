@@ -10,6 +10,7 @@
 </head>
 <body>
   <%if user_signed_in? %>
+<<<<<<< HEAD
   <div class = "container">
     <header class="row" style="margin-top: 20px;">
       <div class = "col-xs-offset-1 col-xs-8">
@@ -20,6 +21,67 @@
           <li><a href="/organizations" class="organizations">Organizations</a></li>
           <li><a href="/requests" class="requests">Requests</a></li>
         </ul>
+=======
+    <div class="container">
+
+      <header class="row" style="margin-top: 20px;">
+        <div class = "col-xs-offset-1 col-xs-8">
+          <ul class="nav nav-pills">
+            <li><%= link_to t(".home"), root_path %></li>
+            <li><%= link_to "Requests", requests_path %></li>
+            <li><%= link_to "Organizations", organizations_path %></li>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+          </ul>
+        </div>
+            <div class="col-xs-2">
+              <div class="dropdown">
+                <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
+                  <div class="dropdown-content">
+                    <%= link_to "Редактировать", edit_user_registration_path %>
+                    <%= link_to "Выход", destroy_user_session_path, method: :delete %>
+                  </div>
+                </div>
+              </div>
+          <%else%>
+          <%end%>
+        </div>
+      </header>
+
+      <div class="col-xs-1">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+          <span class="lang-xs lang-lbl" lang="<%= I18n.locale %>"></span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to locale: 'uk' do %>
+              <span class="lang-xs lang-lbl-full" lang="uk"></span>
+            <% end %>
+          </li>
+          <li class="divider" role="separator"></li>
+          <li>
+            <%= link_to locale: 'ru' do %>
+              <span class="lang-xs lang-lbl-full" lang="ru"></span>
+            <% end %>
+          </li>
+          <li class="divider" role="separator"></li>
+          <li>
+            <%= link_to locale: 'en' do %>
+              <span class="lang-xs lang-lbl-full" lang="en"></span>
+            <% end %>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="row">
+        <% flash.each do |name, msg|%>
+          <%=msg%>
+        <%end%>
+        <div class="tbody col-xs-10 col-xs-offset-1" style = "margin-top:50px; min-height: 680px;">
+          <%= yield %>
+        </div>
+>>>>>>> 2fc115f9d6a30b66809abdcd6e428b7956e16e50
       </div>
       <div class="col-xs-2">
         <div class="dropdown">

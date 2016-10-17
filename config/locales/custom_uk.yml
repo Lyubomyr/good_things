@@ -1,0 +1,24 @@
+uk:
+  layouts:
+    application:
+      home: "Додому"
+    top_navigation:
+      sign_in: "Увійти"
+      projects: "Проекти"
+      news: "Новини"
+  activerecord:
+    models:
+      organization: "Організація"
+    attributes:
+      organization:
+         name: "Імя"
+         title: "Заголовок"
+         text: "Текст"
+         target: "Цільова аудиторія"
+         schedule: "Запланувати"
+         status: "Статус"
+         confirmed: "Дозволено"
+  campaigns:
+    new:
+      new_campaign: "Нова розсилка"
+

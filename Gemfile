@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+gem 'http_accept_language'
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
 
