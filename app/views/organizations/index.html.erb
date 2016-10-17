@@ -1,6 +1,10 @@
+
 <p id="notice"><%= notice %></p>
+<% provide(:title, 'Foo') %>
+
 
 <h1>My Organizations</h1>
+
 <body id="organizations">
 <table class="table">
   <thead>
@@ -16,6 +20,7 @@
   <tbody>
   <% @organizations.each do |organization| %>
       <tr>
+      
         <td><%= organization.name %></td>
         <td><%= organization.description%></td>
         <td><%= organization.address %></td>

@@ -1,0 +1,36 @@
+
+<p id="notice"><%= notice %></p>
+<h1>Users</h1>
+<body>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Country</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name%></td>
+        <td><%= user.country %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Show', new_admin_add_user_path %></td>
+        <td><%= link_to 'Edit', edit_admin_add_user_url(user) %></td>
+      </tr>
+  <% end %>
+  </table>
+  </tbody>
+</table>
+</body>
+
+
+
+<br>
+
+<%= link_to 'Create User', new_admin_add_user_path %>

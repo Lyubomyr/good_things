@@ -1,56 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GoodThings</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>GoodThings</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-
-
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <body>
-    <div class="container">
-
-      <header class="row" style="margin-top: 20px;">
-        <div class = "col-xs-offset-1 col-xs-9">
-          <ul class="nav nav-pills">
-          <li><a href="add_user_path" >User</a></li>
-            <li><a href="#" >Request</a></li>
-            <li><a href="#" >Static Page</a></li>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
-          </ul>
-        </div>
-        <div class="col-xs-2">
-          <%if user_signed_in? %>
-              <div class="dropdown">
-                <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
-                  <div class="dropdown-content">
-                    <%= link_to "Юзер", root_path %>
-                    <%= link_to "Редактировать", edit_user_registration_path %>
-                    <%= link_to "Выход", destroy_user_session_path, method: :delete %>
-                  </div>
-                </div>
-              </div>
-          <!-- <%else%> -->
-
-          <%end%>
-        </div>
-      </header>
-
-      <div class="row">
-        <% flash.each do |name, msg|%>
-          <%=msg%>
-        <%end%>
-        <div class="tbody col-xs-10 col-xs-offset-1" style = "margin-top:50px; min-height: 680px;">
-          <%= yield %>
+  <%if user_signed_in? %>
+  <div class = "container">
+    <header class="row" style="margin-top: 20px;">
+      <div class = "col-xs-offset-1 col-xs-8">
+        <ul class="nav nav-pills">
+          <li><a href="add_users#show" >User</a></li>
+          <li><a href="#" >Request</a></li>
+          <li><a href="#" >Static Page</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-2">
+        <div class="dropdown">
+          <div style="display:inline-block" class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %>
+            <div class="dropdown-content" style="z-index: 999">
+              <%= link_to "Юзер", root_path %>
+              <%= link_to "Редактировать", edit_user_registration_path %>
+              <%= link_to "Выход", destroy_user_session_path, method: :delete %>
+            </div>
+          </div>
         </div>
       </div>
+    </header>
+    <div class="tbody col-xs-10 col-xs-offset-1" style = "margin-top:0px; min-height: 980px;">
+      <%= yield %>
     </div>
-  <h1>This only for admin</h1>
-    <%= yield %>
+    <%end%>
+    <footer class="col-xs-12">
+      <div class="center-block">
+        <p> Good Things, <%= Time.now.to_datetime.year %> </p>
+      </div>
+    </footer>
+  </div>
 </body>
-
-
 </html>
